@@ -1,14 +1,23 @@
 #include "game.h"
 #include "surface.h"
+#include "template.h"
 #include <cstdio> //printf
+#include "background.h"
 
 namespace Tmpl8
 {
+	//Create background object
+	Background background;
+
 	// -----------------------------------------------------------
 	// Initialize the application
 	// -----------------------------------------------------------
 	void Game::Init()
 	{
+		//Draw background image scaled with starting and ending postion on the screen
+		//And with current width and height of the screen
+		background.DrawBackground("assets/sky.png", 0, 0, ScreenWidth, ScreenHeight, screen);
+
 	}
 
 	// -----------------------------------------------------------
@@ -16,25 +25,14 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Shutdown()
 	{
-	}
 
-	static Sprite rotatingGun(new Surface("assets/aagun.tga"), 36);
-	static int frame = 0;
+	}
 
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
 	void Game::Tick(float deltaTime)
 	{
-		// clear the graphics window
-		screen->Clear(0);
-		// print something in the graphics window
-		screen->Print("hello world", 2, 2, 0xffffff);
-		// print something to the text window
-		printf("this goes to the console window.\n");
-		// draw a sprite
-		rotatingGun.SetFrame(frame);
-		rotatingGun.Draw(screen, 100, 100);
-		if (++frame == 36) frame = 0;
+
 	}
 };
