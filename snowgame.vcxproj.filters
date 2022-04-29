@@ -8,7 +8,7 @@
     <ClCompile Include="surface.cpp">
       <Filter>Template</Filter>
     </ClCompile>
-    <ClCompile Include="background.cpp" />
+    <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="template.h">
@@ -17,22 +17,12 @@
     <ClInclude Include="surface.h">
       <Filter>Template</Filter>
     </ClInclude>
-    <ClInclude Include="background.h">
-      <Filter>Background</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Background</Filter>
-    </ClInclude>
+    <ClInclude Include="game.h" />
+    <ClInclude Include="player.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Template">
       <UniqueIdentifier>{727e7398-24b3-4f0e-adf0-6850c4e95415}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Background">
-      <UniqueIdentifier>{a7862569-891e-4aa8-bcc3-fc03486712a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Player">
-      <UniqueIdentifier>{e2d1bdfa-4db9-4ac0-a0f7-f03528eab481}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
