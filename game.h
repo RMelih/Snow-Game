@@ -16,14 +16,26 @@ namespace Tmpl8 {
 		void KeyUp(int key);
 		void KeyDown(int key);
 
-		void MovePlayer(float deltaTime);
-	private:
-		Surface* screen;
+		//Check if player is on screen
+		void PlayerMovementBoundary();
 
+		//Get the raduis of a circle sprite
+		float GetRaduisCircle(float circleSpriteWidth);
+
+	private:
 		float m_Left = 0.0f;
 		float m_Right = 0.0f;
 		float m_Up = 0.0f;
 		float m_Down = 0.0f;
+
+		//varaibles for player postion, width and height
+		float playerPosX, playerPosY;
+		float playerSpriteW, playerSpriteH;
+
+		//varaibles for calculating raduis
+		float circleSpriteWidth, raduis;
+
+		Surface* screen;
 	};
 
 }; // namespace Tmpl8
