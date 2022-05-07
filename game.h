@@ -6,6 +6,27 @@ namespace Tmpl8 {
 	class Game
 	{
 	public:
+		//Construcator
+		Game()
+		{
+			//player positions
+			playerPosX = 0.0f;
+			playerPosY = 0.0f;
+
+			//player sprite values
+			playerSpriteW = 25.0f;
+			playerSpriteH = 25.0f;
+
+			//player movemnt varaibles
+			movementLeft = 0.0f;
+			movementRight = 0.0f;
+			movementUp = 0.0f;
+			movementDown = 0.0f;
+			playerSpeed = 2.0f;
+
+			screen = screen;
+		}
+
 		void SetTarget(Surface* surface) { screen = surface; }
 		void Init();
 		void Shutdown();
@@ -19,23 +40,21 @@ namespace Tmpl8 {
 		//Check if player is on screen
 		void PlayerMovementBoundary();
 
-		//Get the raduis of a circle sprite
-		float GetRaduisCircle(float circleSpriteWidth);
-
 	private:
-		float m_Left = 0.0f;
-		float m_Right = 0.0f;
-		float m_Up = 0.0f;
-		float m_Down = 0.0f;
-
-		//varaibles for player postion, width and height
-		float playerPosX, playerPosY;
-		float playerSpriteW, playerSpriteH;
-
-		//varaibles for calculating raduis
-		float circleSpriteWidth, raduis;
-
 		Surface* screen;
+
+		//player movemnt varaibles
+		float movementLeft;
+		float movementRight;
+		float movementUp;
+		float movementDown;
+		float playerSpeed;
+
+		//varaibles for player postion, width and height and speed
+		float playerPosX;
+		float playerPosY;
+		float playerSpriteW;
+		float playerSpriteH;
 	};
 
 }; // namespace Tmpl8

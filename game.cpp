@@ -4,12 +4,25 @@
 #include <cstdio> //printf
 #include "SDL_scancode.h"
 #include <iostream>
+#include "spawner.h"
+
 
 namespace Tmpl8
 {
 	//Create player sprite
 	Sprite playerSprite(new Surface("assets/snowman.png"), 1);
 
+	//Create spawner object
+	Spawner spawner;
+
+	// -----------------------------------------------------------
+	// Initialize the application
+	// -----------------------------------------------------------
+	void Game::Init()
+	{
+		//initliase all object in the spawner
+		spawner.InitObjects();
+	}
 
 	//Checking if a key is pressed
 	void Game::KeyDown(int key)
@@ -17,16 +30,16 @@ namespace Tmpl8
 		switch (key)
 		{
 		case SDL_SCANCODE_LEFT:
-			m_Left = 1.0f;
+			movementLeft = playerSpeed;
 			break;
 		case SDL_SCANCODE_RIGHT:
-			m_Right = 1.0f;
+			movementRight = playerSpeed;
 			break;
 		case SDL_SCANCODE_UP:
-			m_Up = 1.0f;
+			movementUp = playerSpeed;
 			break;
 		case SDL_SCANCODE_DOWN:
-			m_Down = 1.0f;
+			movementDown = playerSpeed;
 			break;
 		default:
 			break;
@@ -39,41 +52,20 @@ namespace Tmpl8
 		switch (key)
 		{
 		case SDL_SCANCODE_LEFT:
-			m_Left = 0.0f;
+			movementLeft = 0.0f;
 			break;
 		case SDL_SCANCODE_RIGHT:
-			m_Right = 0.0f;
+			movementRight = 0.0f;
 			break;
 		case SDL_SCANCODE_UP:
-			m_Up = 0.0f;
+			movementUp = 0.0f;
 			break;
 		case SDL_SCANCODE_DOWN:
-			m_Down = 0.0f;
+			movementDown = 0.0f;
 			break;
 		default:
 			break;
 		}
-	}
-
-	//Function to get the raduis of a circle
-	float Game::GetRaduisCircle(float circleSpriteWidth)
-	{
-		//Calcuate the raduis with the formule raduis: square root area / pi
-		raduis = sqrt(circleSpriteWidth / 3.14f);
-
-		return raduis;
-	}
-
-	// -----------------------------------------------------------
-	// Initialize the application
-	// -----------------------------------------------------------
-	void Game::Init()
-	{
-		//player positions
-		playerPosX = 0.0f, playerPosY = 0.0f;
-
-		//player sprite values
-		playerSpriteW = 25.0f, playerSpriteH = 25.0f;
 	}
 
 	// -----------------------------------------------------------
@@ -101,28 +93,31 @@ namespace Tmpl8
 	}
 
 	// -----------------------------------------------------------
-	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
 	void Game::Tick(float deltaTime)
 	{
+
 		//change deltatime to s insteads of miliseconds
 		deltaTime /= 1000;
 
-		//Clear the screen every frame with the light gray background color:0xf2f2f2
-		screen->Clear(0xf2f2f2);
+		//Clear the screen every frame with the light gray background color:0xf9f9f9
+		screen->Clear(0xf9f9f9);
 
 		//Checking and update player postion if it goes out of screen
 		PlayerMovementBoundary();
 
 		//player movement
-		float newPosX = playerPosX + (m_Right - m_Left) * deltaTime * 60.0f;
-		float newPosY = playerPosY + (m_Down - m_Up) * deltaTime * 60.0f;
+		float newPosX = playerPosX + (movementRight - movementLeft) * deltaTime * 60.0f;
+		float newPosY = playerPosY + (movementDown - movementUp) * deltaTime * 60.0f;
 
 		//update the player postion
 		playerPosX = newPosX, playerPosY = newPosY;
 
 		//draw player with updated positons and updated sprite width and height
 		playerSprite.DrawScaled(playerPosX, playerPosY, playerSpriteW, playerSpriteH, screen);
+
+		//Draw the spawner
+		spawner.DrawObjects(screen);
 	}
 };

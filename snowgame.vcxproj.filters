@@ -8,6 +8,15 @@
     <ClCompile Include="surface.cpp">
       <Filter>Template</Filter>
     </ClCompile>
+    <ClCompile Include="spawnobject.cpp">
+      <Filter>Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="spawner.cpp">
+      <Filter>Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="template.h">
@@ -17,11 +26,25 @@
       <Filter>Template</Filter>
     </ClInclude>
     <ClInclude Include="game.h" />
-    <ClInclude Include="txt.h" />
+    <ClInclude Include="spawnobject.h">
+      <Filter>Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="spawner.h">
+      <Filter>Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Template">
       <UniqueIdentifier>{727e7398-24b3-4f0e-adf0-6850c4e95415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spawner">
+      <UniqueIdentifier>{81707462-1bdf-41a0-adc1-7de6cb6a320c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{a7929fb0-36e3-48c5-8e8d-ff9e4db133c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
