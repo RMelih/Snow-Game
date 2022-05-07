@@ -1,5 +1,5 @@
 #include "surface.h"
-#include "template.h"
+#include <iostream>
 
 class Spawner
 {
@@ -7,8 +7,14 @@ public:
 	//Consturctor Spawner
 	Spawner()
 	{
-		currenPosX = 250.0f;
-		currenPosY = 250.0f;
+		//Random postion for the object at the start of the game
+		currentPosX = 250.0f;
+		currentPosY = 150.0f;
+	}
+
+	~Spawner()
+	{
+		std::cout << "Destructor" << std::endl;
 	}
 
 	//Function which Initliasiles the objects at the start of the game
@@ -19,11 +25,22 @@ public:
 	float ReturnRandomPosX();
 	float ReturnRandomPosY();
 
+	//Functions to return object current position
+	float GetObjectCurrentPosX();
+	float GetObjectCurrentPosY();
+
+	//Functions to return current object sprite width and height
+	float GetObjectCurrentWidth();
+	float GetObjectCurrentHeight();
+
+	//Gets new random object
+	void GetNewObject();
+
 	//Function which draw the objects
 	void DrawObjects(Tmpl8::Surface* screen);
 
 private:
 	//varibles for spawner postions
-	float currenPosX, currenPosY;
+	float currentPosX, currentPosY;
 };
 

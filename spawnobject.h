@@ -15,9 +15,6 @@ public:
 		decreaseValue = 1.0f;
 	};
 
-	//Destructor
-	//~SpawnObject();
-
 	//Setter
 	void SetSpawnObject(char* spriteFile, float spriteW, float spriteH, float spriteLastingTime, float increaseValue, float decreaseValue);
 	void SetSpriteFile(char* spriteFile);

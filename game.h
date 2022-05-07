@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 
 namespace Tmpl8 {
 
@@ -22,7 +23,7 @@ namespace Tmpl8 {
 			movementRight = 0.0f;
 			movementUp = 0.0f;
 			movementDown = 0.0f;
-			playerSpeed = 2.0f;
+			playerSpeed = 2.5f;
 
 			screen = screen;
 		}
@@ -40,6 +41,18 @@ namespace Tmpl8 {
 		//Check if player is on screen
 		void PlayerMovementBoundary();
 
+		//Get the raduis from a player circle
+		float GetRaduisCirclePlayer();
+
+		//Get the raduis from a the current spawn object on screen
+		float GetRaduisCircleObject();
+
+		//Functon which will check collsion all frames
+		bool ReturnCollsionValue();
+
+		//Function which check collision and makes changes after the collsion
+		void CollisionResponse();
+
 	private:
 		Surface* screen;
 
@@ -55,6 +68,10 @@ namespace Tmpl8 {
 		float playerPosY;
 		float playerSpriteW;
 		float playerSpriteH;
+
+		//Fucntion to calculate the distance between the player and object centers
+		//And returns the distance
+		float CalcuateDistance();
 	};
 
 }; // namespace Tmpl8

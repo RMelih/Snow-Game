@@ -4,6 +4,7 @@
 #include "spawnobject.h"
 #include "timer.h"
 #include "template.h"
+#include "game.h"
 
 // create vector of objects
 std::vector<SpawnObject> SpawnObjects;
@@ -19,24 +20,54 @@ SpawnObject spawnObject5;
 //Create a Timer
 Timer timer;
 
+//Create game class reference
+Tmpl8::Game game;
+
 void Spawner::InitObjects()
 {
 	//Here you can change objects params
 	spawnObject1.SetSpriteFile("assets/Crate.png");
 	spawnObject2.SetSpriteFile("assets/Icebox.png");
 	spawnObject3.SetSpriteFile("assets/Igloo.png");
-	spawnObject4.SetSpriteFile("assets/Tree2.png");
+	spawnObject4.SetSpriteFile("assets/Tree_2.png");
 	spawnObject5.SetSpriteFile("assets/Stone.png");
 
 	//Add objects to vector contatiner
 	SpawnObjects.push_back(currentObject);
 	SpawnObjects.push_back(spawnObject1);
 	SpawnObjects.push_back(spawnObject2);
+	SpawnObjects.push_back(spawnObject3);
+	SpawnObjects.push_back(spawnObject4);
+	SpawnObjects.push_back(spawnObject5);
+}
+
+//Getters
+float Spawner::GetObjectCurrentPosX()
+{
+	return currentPosX;
+}
+
+float Spawner::GetObjectCurrentPosY()
+{
+	return currentPosY;
+}
+
+float Spawner::GetObjectCurrentWidth()
+{
+	return currentObject.GetSpriteW();
+}
+
+float Spawner::GetObjectCurrentHeight()
+{
+	return currentObject.GetSpriteH();
 }
 
 //Function which return a random object from the vector container
 SpawnObject ReturnRadomSpawnObject()
 {
+	//random seed to get new object every run
+	srand(time(NULL));
+
 	//Get a random interger number based on vector container size
 	int random = rand() % SpawnObjects.size();
 	//assign the the random spawnobject to a new spawObject
@@ -48,16 +79,26 @@ SpawnObject ReturnRadomSpawnObject()
 //Return random width number within the screen boundarys
 float Spawner::ReturnRandomPosX()
 {
-	currenPosX = IRand(ScreenWidth - currentObject.GetSpriteW());
-	return currenPosX;
+	currentPosX = IRand((int)ScreenWidth - (int)currentObject.GetSpriteW());
+	return currentPosX;
 }
 
 //Return random height number within the screen boundarys
 float Spawner::ReturnRandomPosY()
 {
-	currenPosY = IRand(ScreenHeight - currentObject.GetSpriteH());
-	return currenPosY;
+	currentPosY = IRand((int)ScreenHeight - (int)currentObject.GetSpriteH());
+	return currentPosY;
 }
+
+//Gets a random object, posX, posY en resets the time
+void Spawner::GetNewObject()
+{
+	currentObject = ReturnRadomSpawnObject();
+	currentPosX = ReturnRandomPosX();
+	currentPosY = ReturnRandomPosY();
+	timer.Reset();
+}
+
 
 void Spawner::DrawObjects(Tmpl8::Surface* screen)
 {
@@ -69,8 +110,8 @@ void Spawner::DrawObjects(Tmpl8::Surface* screen)
 	if (timer.TotalTimeSeconds() > currentObject.GetSpriteLastingTime())
 	{
 		currentObject = ReturnRadomSpawnObject();
-		currenPosX = ReturnRandomPosX();
-		currenPosY = ReturnRandomPosY();
+		currentPosX = ReturnRandomPosX();
+		currentPosY = ReturnRandomPosY();
 	}
 
 	//Reset the timer back to 0 after sprite lasting time has passed
@@ -80,5 +121,6 @@ void Spawner::DrawObjects(Tmpl8::Surface* screen)
 	}
 
 	//Draw the current object
-	currentObject.DrawObject(currentObject.GetSpriteFile(), currenPosX, currenPosY, currentObject.GetSpriteW(), currentObject.GetSpriteH(), screen);
+	currentObject.DrawObject(currentObject.GetSpriteFile(), currentPosX, currentPosY, currentObject.GetSpriteW(), currentObject.GetSpriteH(), screen);
+
 }
