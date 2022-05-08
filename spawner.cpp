@@ -15,6 +15,8 @@ SpawnObject spawnObject2;
 SpawnObject spawnObject3;
 SpawnObject spawnObject4;
 SpawnObject spawnObject5;
+SpawnObject spawnObject6;
+SpawnObject spawnObject7;
 
 //Create a Timer
 Timer timer;
@@ -25,11 +27,13 @@ Tmpl8::Game game;
 void Spawner::InitObjects()
 {
 	//Here you can change objects params
-	spawnObject1.SetSpriteFile("assets/Crate.png");
-	spawnObject2.SetSpriteFile("assets/Icebox.png");
-	spawnObject3.SetSpriteFile("assets/Igloo.png");
-	spawnObject4.SetSpriteFile("assets/Tree_2.png");
-	spawnObject5.SetSpriteFile("assets/Stone.png");
+	spawnObject1.SetSpriteFile("assets/kenney/ball (1).png");
+	spawnObject2.SetSpriteFile("assets/kenney/ball (2).png");
+	spawnObject3.SetSpriteFile("assets/kenney/ball (3).png");
+	spawnObject4.SetSpriteFile("assets/kenney/ball (4).png");
+	spawnObject5.SetSpriteFile("assets/kenney/ball (5).png");
+	spawnObject6.SetSpriteFile("assets/kenney/tree (2).png");
+	spawnObject7.SetSpriteFile("assets/kenney/tree.png");
 
 	//Add objects to vector contatiner
 	SpawnObjects.push_back(currentObject);
@@ -38,6 +42,8 @@ void Spawner::InitObjects()
 	SpawnObjects.push_back(spawnObject3);
 	SpawnObjects.push_back(spawnObject4);
 	SpawnObjects.push_back(spawnObject5);
+	SpawnObjects.push_back(spawnObject6);
+	SpawnObjects.push_back(spawnObject7);
 }
 
 //Getters

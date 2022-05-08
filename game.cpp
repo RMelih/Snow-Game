@@ -20,6 +20,41 @@ namespace Tmpl8
 	//Create spawner object
 	Spawner spawner;
 
+	//Construcator
+	Game::Game()
+	{
+		//player sprite values
+		playerSpriteW = 20.0f;
+		playerSpriteH = 20.0f;
+		playerSpriteMinW = 12.0f;
+		playerSpriteMinH = 12.0f;
+		playerSpriteMaxW = 36.0f;
+		playerSpriteMaxH = 36.0f;
+
+		//player positions
+		playerPosX = ScreenWidth / 2;
+		playerPosY = ScreenHeight / 2;
+
+		//player movemnt varaibles
+		movementLeft = 0.0f;
+		movementRight = 0.0f;
+		movementUp = 0.0f;
+		movementDown = 0.0f;
+		playerSpeed = 2.5f;
+
+		//game score
+		score = 0;
+
+		//player health
+		minPlayerHealth = 0;
+		maxPlayerHealth = 3;
+		currentPlayerHealth = 3;
+		playerHealthIncreaseValue = 1;
+		playerHealthDeacreseValue = 1;
+
+		screen = screen;
+	}
+
 	// -----------------------------------------------------------
 	// Initialize the application
 	// -----------------------------------------------------------
@@ -162,6 +197,7 @@ namespace Tmpl8
 		if (ReturnCollsionValue() == true)
 		{
 			spawner.GetNewObject();
+			currentPlayerHealth += playerHealthIncreaseValue;
 			score += spawnobject.GetIncreaseValueScore();
 			playerSpriteW += spawnobject.GetIncreaseValue();
 			playerSpriteH += spawnobject.GetIncreaseValue();
@@ -172,8 +208,24 @@ namespace Tmpl8
 		if (spawner.ReturnIsObjectCollided() == true)
 		{
 			score -= spawnobject.GetDeacreseValueScore();
+			currentPlayerHealth -= playerHealthDeacreseValue;
 			playerSpriteW -= spawnobject.GetDeacreseValue();
 			playerSpriteH -= spawnobject.GetDeacreseValue();
+		}
+	}
+
+	//Player health
+	void Game::HealthGame()
+	{
+		//Set min and max value to player health
+		if (currentPlayerHealth <= minPlayerHealth) currentPlayerHealth = minPlayerHealth;
+
+		if (currentPlayerHealth >= maxPlayerHealth) currentPlayerHealth = maxPlayerHealth;
+
+		//de the health sprite based on reaming health
+		for (int i = minPlayerHealth; i < currentPlayerHealth; i++)
+		{
+			spawnobject.DrawObject("assets/snowman.png", 35 + i * 50, ScreenHeight - 40, spawnobject.GetSpriteW(), spawnobject.GetSpriteH(), screen);
 		}
 	}
 
@@ -185,10 +237,7 @@ namespace Tmpl8
 		sprintf(text, "%i", score);
 
 		//Set score to a min value of 0
-		if (score <= 0)
-		{
-			score = 0;
-		}
+		if (score <= 0) score = 0;
 
 		//Draw the score to screen
 		screen->Print(text, ScreenWidth - 75, ScreenHeight - 35, 0x000000, 2);
@@ -203,7 +252,7 @@ namespace Tmpl8
 		deltaTime /= 1000;
 
 		//Clear the screen every frame with the light gray background color:0xf9f9f9
-		screen->Clear(0xf9f9f9);
+		screen->Clear(0xffffff);
 
 		//player movement
 		float newPosX = playerPosX + (movementRight - movementLeft) * deltaTime * 60.0f;
@@ -229,5 +278,8 @@ namespace Tmpl8
 
 		//Draw the score
 		ScoreGame();
+
+		//Draw the health
+		HealthGame();
 	}
 };

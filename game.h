@@ -7,32 +7,7 @@ namespace Tmpl8 {
 	{
 	public:
 		//Construcator
-		Game()
-		{
-			//player positions
-			playerPosX = 0.0f;
-			playerPosY = 0.0f;
-
-			//player sprite values
-			playerSpriteW = 20.0f;
-			playerSpriteH = 20.0f;
-			playerSpriteMinW = 12.0f;
-			playerSpriteMinH = 12.0f;
-			playerSpriteMaxW = 36.0f;
-			playerSpriteMaxH = 36.0f;
-
-			//player movemnt varaibles
-			movementLeft = 0.0f;
-			movementRight = 0.0f;
-			movementUp = 0.0f;
-			movementDown = 0.0f;
-			playerSpeed = 2.5f;
-
-			//game score
-			score = 0;
-
-			screen = screen;
-		}
+		Game();
 
 		void SetTarget(Surface* surface) { screen = surface; }
 		void Init();
@@ -65,6 +40,9 @@ namespace Tmpl8 {
 		//Function which is responive for the game score
 		void ScoreGame();
 
+		//Function which is responcive for the health of the player
+		void HealthGame();
+
 	private:
 		Surface* screen;
 
@@ -87,6 +65,13 @@ namespace Tmpl8 {
 
 		//game score
 		int score;
+
+		//player health
+		int minPlayerHealth;
+		int maxPlayerHealth;
+		int currentPlayerHealth;
+		int playerHealthIncreaseValue;
+		int playerHealthDeacreseValue;
 
 		//Fucntion to calculate the distance between the player and object centers
 		//And returns the distance
