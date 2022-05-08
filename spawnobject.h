@@ -7,7 +7,7 @@ public:
 	SpawnObject()
 	{
 		//Starting values for the SpawnObject
-		spriteFile = "assets/Crystal.png";
+		spriteFile = "assets//snowflake/snowflake (1).png";
 		spriteW = 25.0f;
 		spriteH = 25.0f;
 		spriteLastingTime = 5.0f;

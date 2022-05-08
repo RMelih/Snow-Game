@@ -17,6 +17,15 @@ SpawnObject spawnObject4;
 SpawnObject spawnObject5;
 SpawnObject spawnObject6;
 SpawnObject spawnObject7;
+SpawnObject spawnObject8;
+SpawnObject spawnObject9;
+SpawnObject spawnObject10;
+SpawnObject spawnObject11;
+SpawnObject spawnObject12;
+SpawnObject spawnObject13;
+SpawnObject spawnObject14;
+SpawnObject spawnObject15;
+SpawnObject spawnObject16;
 
 //Create a Timer
 Timer timer;
@@ -27,13 +36,23 @@ Tmpl8::Game game;
 void Spawner::InitObjects()
 {
 	//Here you can change objects params
-	spawnObject1.SetSpriteFile("assets/kenney/ball (1).png");
-	spawnObject2.SetSpriteFile("assets/kenney/ball (2).png");
-	spawnObject3.SetSpriteFile("assets/kenney/ball (3).png");
-	spawnObject4.SetSpriteFile("assets/kenney/ball (4).png");
-	spawnObject5.SetSpriteFile("assets/kenney/ball (5).png");
-	spawnObject6.SetSpriteFile("assets/kenney/tree (2).png");
-	spawnObject7.SetSpriteFile("assets/kenney/tree.png");
+	spawnObject1.SetSpriteFile("assets/snowflake/snowflake (1).png");
+	spawnObject2.SetSpriteFile("assets/snowflake/snowflake (2).png");
+	spawnObject3.SetSpriteFile("assets/snowflake/snowflake (3).png");
+	spawnObject4.SetSpriteFile("assets/snowflake/snowflake (4).png");
+	spawnObject5.SetSpriteFile("assets/snowflake/snowflake (5).png");
+	spawnObject6.SetSpriteFile("assets/snowflake/snowflake (6).png");
+	spawnObject7.SetSpriteFile("assets/snowflake/snowflake (7).png");
+	spawnObject8.SetSpriteFile("assets/snowflake/snowflake (8).png");
+	spawnObject9.SetSpriteFile("assets/snowflake/snowflake (9).png");
+	spawnObject10.SetSpriteFile("assets/snowflake/snowflake (10).png");
+	spawnObject11.SetSpriteFile("assets/snowflake/snowflake (11).png");
+	spawnObject12.SetSpriteFile("assets/snowflake/snowflake (12).png");
+	spawnObject13.SetSpriteFile("assets/snowflake/snowflake (13).png");
+	spawnObject14.SetSpriteFile("assets/snowflake/snowflake (14).png");
+	spawnObject15.SetSpriteFile("assets/snowflake/snowflake (15).png");
+	spawnObject16.SetSpriteFile("assets/snowflake/snowflake (16).png");
+
 
 	//Add objects to vector contatiner
 	SpawnObjects.push_back(currentObject);
@@ -44,6 +63,15 @@ void Spawner::InitObjects()
 	SpawnObjects.push_back(spawnObject5);
 	SpawnObjects.push_back(spawnObject6);
 	SpawnObjects.push_back(spawnObject7);
+	SpawnObjects.push_back(spawnObject8);
+	SpawnObjects.push_back(spawnObject9);
+	SpawnObjects.push_back(spawnObject10);
+	SpawnObjects.push_back(spawnObject11);
+	SpawnObjects.push_back(spawnObject12);
+	SpawnObjects.push_back(spawnObject13);
+	SpawnObjects.push_back(spawnObject14);
+	SpawnObjects.push_back(spawnObject15);
+	SpawnObjects.push_back(spawnObject16);
 }
 
 //Getters

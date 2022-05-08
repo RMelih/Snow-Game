@@ -12,7 +12,10 @@
 namespace Tmpl8
 {
 	//Create player sprite
-	Sprite playerSprite(new Surface("assets/snowman.png"), 1);
+	Sprite playerSprite(new Surface("assets/snowman1.png"), 1);
+
+	//Creat background
+	Sprite background(new Surface("assets/Night Mointains Lake/NML.png"), 1);
 
 	//Create spawnobject
 	SpawnObject spawnobject;
@@ -20,16 +23,19 @@ namespace Tmpl8
 	//Create spawner object
 	Spawner spawner;
 
-	//Construcator
-	Game::Game()
+	// -----------------------------------------------------------
+	// Initialize the application
+	// -----------------------------------------------------------
+	void Game::Init()
 	{
 		//player sprite values
+		playerSprite;
 		playerSpriteW = 20.0f;
 		playerSpriteH = 20.0f;
-		playerSpriteMinW = 12.0f;
-		playerSpriteMinH = 12.0f;
-		playerSpriteMaxW = 36.0f;
-		playerSpriteMaxH = 36.0f;
+		playerSpriteMinW = 40.0f;
+		playerSpriteMinH = 40.0f;
+		playerSpriteMaxW = 10.0f;
+		playerSpriteMaxH = 10.0f;
 
 		//player positions
 		playerPosX = ScreenWidth / 2;
@@ -51,15 +57,9 @@ namespace Tmpl8
 		currentPlayerHealth = 3;
 		playerHealthIncreaseValue = 1;
 		playerHealthDeacreseValue = 1;
+		healthSpriteValueW = 25.0f;
+		healthSpriteValueH = 25.0f;
 
-		screen = screen;
-	}
-
-	// -----------------------------------------------------------
-	// Initialize the application
-	// -----------------------------------------------------------
-	void Game::Init()
-	{
 		//initliase all object in the spawner
 		spawner.InitObjects();
 
@@ -147,7 +147,7 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Shutdown()
 	{
-
+		Init();
 	}
 
 	//Check boundary of the player on the screen
@@ -207,7 +207,6 @@ namespace Tmpl8
 		//Decrease the player sprite width and height if it fails to collids with object
 		if (spawner.ReturnIsObjectCollided() == true)
 		{
-			score -= spawnobject.GetDeacreseValueScore();
 			currentPlayerHealth -= playerHealthDeacreseValue;
 			playerSpriteW -= spawnobject.GetDeacreseValue();
 			playerSpriteH -= spawnobject.GetDeacreseValue();
@@ -225,7 +224,7 @@ namespace Tmpl8
 		//de the health sprite based on reaming health
 		for (int i = minPlayerHealth; i < currentPlayerHealth; i++)
 		{
-			spawnobject.DrawObject("assets/snowman.png", 35 + i * 50, ScreenHeight - 40, spawnobject.GetSpriteW(), spawnobject.GetSpriteH(), screen);
+			spawnobject.DrawObject("assets/snowman1.png", 35 + i * healthSpriteValueW, ScreenHeight - 40, healthSpriteValueW, healthSpriteValueH, screen);
 		}
 	}
 
@@ -240,8 +239,10 @@ namespace Tmpl8
 		if (score <= 0) score = 0;
 
 		//Draw the score to screen
-		screen->Print(text, ScreenWidth - 75, ScreenHeight - 35, 0x000000, 2);
+		screen->Print(text, ScreenWidth - 75, ScreenHeight - 35, 0xffffff, 2);
 	}
+
+
 
 	// -----------------------------------------------------------
 	// Main application tick function
@@ -254,6 +255,9 @@ namespace Tmpl8
 		//Clear the screen every frame with the light gray background color:0xf9f9f9
 		screen->Clear(0xffffff);
 
+		//Draw the background
+		background.DrawScaled(0, 0, ScreenWidth, ScreenHeight, screen);
+
 		//player movement
 		float newPosX = playerPosX + (movementRight - movementLeft) * deltaTime * 60.0f;
 		float newPosY = playerPosY + (movementDown - movementUp) * deltaTime * 60.0f;
@@ -262,7 +266,7 @@ namespace Tmpl8
 		playerPosX = newPosX, playerPosY = newPosY;
 
 		//Draw the spawner
-		spawner.DrawObjects(screen);
+		if (ReturnCollsionValue() == false) spawner.DrawObjects(screen);
 
 		//Change player sprite values
 		PlayerSpriteValues();
@@ -281,5 +285,8 @@ namespace Tmpl8
 
 		//Draw the health
 		HealthGame();
+
+		//Resets the game
+		if (currentPlayerHealth == 0) Shutdown();
 	}
 };

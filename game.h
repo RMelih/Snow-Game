@@ -1,4 +1,5 @@
 #pragma once
+#include "template.h"
 
 namespace Tmpl8 {
 
@@ -18,6 +19,8 @@ namespace Tmpl8 {
 		void MouseMove(int x, int y) { /* implement if you want to detect mouse movement */ }
 		void KeyUp(int key);
 		void KeyDown(int key);
+
+		void DrawBackground();
 
 		//Change player sprite min max values if there a breached
 		void PlayerSpriteValues();
@@ -72,6 +75,8 @@ namespace Tmpl8 {
 		int currentPlayerHealth;
 		int playerHealthIncreaseValue;
 		int playerHealthDeacreseValue;
+		float healthSpriteValueW;
+		float healthSpriteValueH;
 
 		//Fucntion to calculate the distance between the player and object centers
 		//And returns the distance
