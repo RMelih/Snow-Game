@@ -7,6 +7,7 @@
 #include "spawner.h"
 #include <math.h>
 #include "spawnobject.h"
+#include <string>
 
 namespace Tmpl8
 {
@@ -33,6 +34,20 @@ namespace Tmpl8
 
 	}
 
+	//Change player sprite min max values if there a breached
+	void Game::PlayerSpriteValues()
+	{
+		//Max values
+		if (playerSpriteW >= playerSpriteMaxW) playerSpriteW = playerSpriteMaxW;
+
+		if (playerSpriteH >= playerSpriteMaxH) playerSpriteH = playerSpriteMaxH;
+
+		//Min values
+		if (playerSpriteW <= playerSpriteMinW) playerSpriteW = playerSpriteMinW;
+
+		if (playerSpriteH <= playerSpriteMinH) playerSpriteH = playerSpriteMinH;
+	}
+
 	//Get the raduis from a player circle
 	float Game::GetRaduisCirclePlayer()
 	{
@@ -40,7 +55,7 @@ namespace Tmpl8
 		return sqrt(playerSpriteW / 3.14f);
 	};
 
-	//Get the raduis from a the current spawn object on screen
+	//Get the raduis from a the player
 	float Game::GetRaduisCircleObject()
 	{
 		//formule to calcute the raduis = square root area / pi
@@ -129,7 +144,7 @@ namespace Tmpl8
 	//update the isThereACollision bool
 	bool Game::ReturnCollsionValue()
 	{
-		if (CalcuateDistance() <= GetRaduisCirclePlayer() + 5 + GetRaduisCircleObject() + 5) {
+		if (CalcuateDistance() - 20.0f < GetRaduisCirclePlayer() + GetRaduisCircleObject()) {
 			return true;
 		}
 		else
@@ -142,11 +157,41 @@ namespace Tmpl8
 	//Gets new object after it collidies with a object
 	void Game::CollisionResponse()
 	{
+		////Increase the score
+		//Increase the player sprite width and height if it collids with object
 		if (ReturnCollsionValue() == true)
 		{
 			spawner.GetNewObject();
-			std::cout << "collision detected" << std::endl;
+			score += spawnobject.GetIncreaseValueScore();
+			playerSpriteW += spawnobject.GetIncreaseValue();
+			playerSpriteH += spawnobject.GetIncreaseValue();
 		}
+
+		//Deacres the score
+		//Decrease the player sprite width and height if it fails to collids with object
+		if (spawner.ReturnIsObjectCollided() == true)
+		{
+			score -= spawnobject.GetDeacreseValueScore();
+			playerSpriteW -= spawnobject.GetDeacreseValue();
+			playerSpriteH -= spawnobject.GetDeacreseValue();
+		}
+	}
+
+	//Update the score
+	void Game::ScoreGame()
+	{
+		//print to a string
+		char text[1];
+		sprintf(text, "%i", score);
+
+		//Set score to a min value of 0
+		if (score <= 0)
+		{
+			score = 0;
+		}
+
+		//Draw the score to screen
+		screen->Print(text, ScreenWidth - 75, ScreenHeight - 35, 0x000000, 2);
 	}
 
 	// -----------------------------------------------------------
@@ -170,6 +215,9 @@ namespace Tmpl8
 		//Draw the spawner
 		spawner.DrawObjects(screen);
 
+		//Change player sprite values
+		PlayerSpriteValues();
+
 		//Check Collision
 		CollisionResponse();
 
@@ -179,5 +227,7 @@ namespace Tmpl8
 		//draw player with updated positons and updated sprite width and height
 		playerSprite.DrawScaled((int)playerPosX, (int)playerPosY, (int)playerSpriteW, (int)playerSpriteH, screen);
 
+		//Draw the score
+		ScoreGame();
 	}
 };

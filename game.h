@@ -1,5 +1,4 @@
 #pragma once
-#include <math.h>
 
 namespace Tmpl8 {
 
@@ -15,8 +14,12 @@ namespace Tmpl8 {
 			playerPosY = 0.0f;
 
 			//player sprite values
-			playerSpriteW = 25.0f;
-			playerSpriteH = 25.0f;
+			playerSpriteW = 20.0f;
+			playerSpriteH = 20.0f;
+			playerSpriteMinW = 12.0f;
+			playerSpriteMinH = 12.0f;
+			playerSpriteMaxW = 36.0f;
+			playerSpriteMaxH = 36.0f;
 
 			//player movemnt varaibles
 			movementLeft = 0.0f;
@@ -24,6 +27,9 @@ namespace Tmpl8 {
 			movementUp = 0.0f;
 			movementDown = 0.0f;
 			playerSpeed = 2.5f;
+
+			//game score
+			score = 0;
 
 			screen = screen;
 		}
@@ -37,6 +43,9 @@ namespace Tmpl8 {
 		void MouseMove(int x, int y) { /* implement if you want to detect mouse movement */ }
 		void KeyUp(int key);
 		void KeyDown(int key);
+
+		//Change player sprite min max values if there a breached
+		void PlayerSpriteValues();
 
 		//Check if player is on screen
 		void PlayerMovementBoundary();
@@ -53,6 +62,9 @@ namespace Tmpl8 {
 		//Function which check collision and makes changes after the collsion
 		void CollisionResponse();
 
+		//Function which is responive for the game score
+		void ScoreGame();
+
 	private:
 		Surface* screen;
 
@@ -68,6 +80,13 @@ namespace Tmpl8 {
 		float playerPosY;
 		float playerSpriteW;
 		float playerSpriteH;
+		float playerSpriteMinW;
+		float playerSpriteMinH;
+		float playerSpriteMaxW;
+		float playerSpriteMaxH;
+
+		//game score
+		int score;
 
 		//Fucntion to calculate the distance between the player and object centers
 		//And returns the distance

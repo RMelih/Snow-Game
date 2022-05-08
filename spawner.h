@@ -1,5 +1,4 @@
 #include "surface.h"
-#include <iostream>
 
 class Spawner
 {
@@ -10,11 +9,7 @@ public:
 		//Random postion for the object at the start of the game
 		currentPosX = 250.0f;
 		currentPosY = 150.0f;
-	}
-
-	~Spawner()
-	{
-		std::cout << "Destructor" << std::endl;
+		isObjectCollided = false;
 	}
 
 	//Function which Initliasiles the objects at the start of the game
@@ -33,6 +28,9 @@ public:
 	float GetObjectCurrentWidth();
 	float GetObjectCurrentHeight();
 
+	//Get isObjectCollided value
+	bool ReturnIsObjectCollided();
+
 	//Gets new random object
 	void GetNewObject();
 
@@ -42,5 +40,8 @@ public:
 private:
 	//varibles for spawner postions
 	float currentPosX, currentPosY;
+
+	//bool to to check if player had collisiod with object before the spriteLastingTime
+	bool isObjectCollided;
 };
 

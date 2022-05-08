@@ -1,6 +1,5 @@
 #include "spawner.h"
 #include "vector"
-#include <iostream>
 #include "spawnobject.h"
 #include "timer.h"
 #include "template.h"
@@ -79,14 +78,14 @@ SpawnObject ReturnRadomSpawnObject()
 //Return random width number within the screen boundarys
 float Spawner::ReturnRandomPosX()
 {
-	currentPosX = IRand((int)ScreenWidth - (int)currentObject.GetSpriteW());
+	currentPosX = IRand(ScreenWidth - (int)currentObject.GetSpriteW());
 	return currentPosX;
 }
 
 //Return random height number within the screen boundarys
 float Spawner::ReturnRandomPosY()
 {
-	currentPosY = IRand((int)ScreenHeight - (int)currentObject.GetSpriteH());
+	currentPosY = IRand(ScreenHeight - (int)currentObject.GetSpriteH());
 	return currentPosY;
 }
 
@@ -99,6 +98,11 @@ void Spawner::GetNewObject()
 	timer.Reset();
 }
 
+//Returns the isObjectCollided bool value
+bool Spawner::ReturnIsObjectCollided()
+{
+	return isObjectCollided;
+}
 
 void Spawner::DrawObjects(Tmpl8::Surface* screen)
 {
@@ -115,10 +119,14 @@ void Spawner::DrawObjects(Tmpl8::Surface* screen)
 	}
 
 	//Reset the timer back to 0 after sprite lasting time has passed
+	//Change the isObjectCollided bool value to true
 	if (timer.TotalTimeSeconds() > currentObject.GetSpriteLastingTime())
 	{
+		isObjectCollided = true;
 		timer.Reset();
 	}
+	//Change the isObjectCollided bool value to false
+	else isObjectCollided = false;
 
 	//Draw the current object
 	currentObject.DrawObject(currentObject.GetSpriteFile(), currentPosX, currentPosY, currentObject.GetSpriteW(), currentObject.GetSpriteH(), screen);

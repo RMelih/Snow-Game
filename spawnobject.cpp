@@ -42,6 +42,16 @@ void SpawnObject::SetDecreaseValue(float decreaseValue)
 	this->decreaseValue = decreaseValue;
 }
 
+void SpawnObject::SetIncreaseValueScore(float increaseValueScore)
+{
+	this->increaseValueScore = increaseValueScore;
+}
+
+void SpawnObject::SetDecreaseValueScore(float decreaseValueScore)
+{
+	this->decreaseValueScore = decreaseValueScore;
+}
+
 //Getters
 char* SpawnObject::GetSpriteFile()
 {
@@ -71,6 +81,17 @@ float SpawnObject::GetDeacreseValue()
 {
 	return decreaseValue;
 }
+
+float SpawnObject::GetIncreaseValueScore()
+{
+	return increaseValueScore;
+}
+
+float SpawnObject::GetDeacreseValueScore()
+{
+	return decreaseValueScore;
+}
+
 
 //Draws the object
 void SpawnObject::DrawObject(char* objectSprite, float posX, float posY, float spriteW, float spriteH, Tmpl8::Surface* screen)
