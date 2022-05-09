@@ -2,6 +2,12 @@
 
 #include <chrono>
 
+/*
+	Note:
+	Timer is from discord buas-assesment channel.
+	Shared by a lecturer from Breda University of Applied Sciences.
+*/
+
 class Timer
 {
 public:

@@ -15,7 +15,7 @@ namespace Tmpl8
 	Sprite playerSprite(new Surface("assets/snowman1.png"), 1);
 
 	//Creat background
-	Sprite background(new Surface("assets/Night Mointains Lake/NML.png"), 1);
+	Sprite background(new Surface("assets/background.png"), 1);
 
 	//Create spawnobject
 	SpawnObject spawnobject;
@@ -53,8 +53,8 @@ namespace Tmpl8
 
 		//player health
 		minPlayerHealth = 0;
-		maxPlayerHealth = 3;
-		currentPlayerHealth = 3;
+		maxPlayerHealth = 4;
+		currentPlayerHealth = maxPlayerHealth;
 		playerHealthIncreaseValue = 1;
 		playerHealthDeacreseValue = 1;
 		healthSpriteValueW = 25.0f;
@@ -242,7 +242,11 @@ namespace Tmpl8
 		screen->Print(text, ScreenWidth - 75, ScreenHeight - 35, 0xffffff, 2);
 	}
 
-
+	void Game::DrawBackground()
+	{
+		//Draw the background
+		background.DrawScaled(0, 0, ScreenWidth, ScreenHeight, screen);
+	}
 
 	// -----------------------------------------------------------
 	// Main application tick function
@@ -256,7 +260,7 @@ namespace Tmpl8
 		screen->Clear(0xffffff);
 
 		//Draw the background
-		background.DrawScaled(0, 0, ScreenWidth, ScreenHeight, screen);
+		DrawBackground();
 
 		//player movement
 		float newPosX = playerPosX + (movementRight - movementLeft) * deltaTime * 60.0f;

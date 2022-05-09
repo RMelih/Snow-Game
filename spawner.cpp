@@ -100,7 +100,6 @@ SpawnObject ReturnRadomSpawnObject()
 {
 	//random seed to get new object every run
 	srand(time(NULL));
-
 	//Get a random interger number based on vector container size
 	int random = rand() % SpawnObjects.size();
 	//assign the the random spawnobject to a new spawObject
@@ -164,5 +163,4 @@ void Spawner::DrawObjects(Tmpl8::Surface* screen)
 
 	//Draw the current object
 	currentObject.DrawObject(currentObject.GetSpriteFile(), currentPosX, currentPosY, currentObject.GetSpriteW(), currentObject.GetSpriteH(), screen);
-
 }

@@ -1,7 +1,6 @@
 #include "spawnobject.h"
 #include "vector"
 
-//Setters
 void SpawnObject::SetSpawnObject(char* spriteFile, float spriteW, float spriteH, float spriteLastingTime, float increaseValue, float decreaseValue)
 {
 	this->spriteFile = spriteFile;

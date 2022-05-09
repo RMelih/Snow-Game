@@ -7,9 +7,6 @@ namespace Tmpl8 {
 	class Game
 	{
 	public:
-		//Construcator
-		Game();
-
 		void SetTarget(Surface* surface) { screen = surface; }
 		void Init();
 		void Shutdown();
